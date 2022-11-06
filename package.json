@@ -1,0 +1,20 @@
+{
+  "name": "nodejsproject",
+  "version": "1.0.0",
+  "description": "\"# NodeJSProject\"",
+  "main": "HelloWorld.js",
+  "scripts": {
+    "start": "node HelloWorld.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/smaksymovych/NodeJSProject.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/smaksymovych/NodeJSProject/issues"
+  },
+  "homepage": "https://github.com/smaksymovych/NodeJSProject#readme"
+}
