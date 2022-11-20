@@ -3,10 +3,16 @@ name: Build and Publish back-end
 on:
   # run it on push to the default repository branch
   push:
-    branches: [ops/add-git-action]
+    branches: [ops/add-docker]
   # run it during pull request
-  pull_request:
-    branches: [add-docker]
+  # pull_request:
+  #  branches: [add-docker]
+
+env:
+  SERVICE-ACCOUNT: kaktus-service-account
+  PROJECT-ID: kaktus-cicd 
+  REPO: us-central1-docker.pkg.dev/kaktus-cicd/kaktus-repo
+  PROVIDER-ID: kaktus-provider
 
 jobs:
   # define job to build and publish docker image
@@ -24,23 +30,22 @@ jobs:
         uses: google-github-actions/auth@v0
         with:
           token_format: access_token
-          workload_identity_provider: ${{ provider-id }}
-          service_account: ${{ service-account }}@${{ project-id }}.iam.gserviceaccount.com
+          workload_identity_provider: ${{ PROVIDER-ID }}
+          service_account: ${{ SERVICE-ACCOUNT }}@${{ PROJECT-ID }}.iam.gserviceaccount.com
           access_token_lifetime: 300s
 
       - name: Login to Artifact Registry
         uses: docker/login-action@v1
         with:
-          registry: us-west2-docker.pkg.dev
+          registry: us-central1-docker.pkg.dev
           username: oauth2accesstoken
           password: ${{ steps.auth.outputs.access_token }}
 
       - name: Build Docker Image
         working-directory: ./
         run: |
-          pwd
-          ls -l 
-          docker build . --file ./apps/main/Dockerfile --tag my-image-name:$(date +%s)
+          VERSION=$(cat VERSION) 
+          docker build . --file Dockerfile --tag node-web-app:$VERSION-$(date +%s)
 
       - name: List of images
         run: docker images 
