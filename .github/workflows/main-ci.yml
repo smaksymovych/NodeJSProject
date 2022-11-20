@@ -13,8 +13,8 @@ env:
   REGION: us-central1
   PROJECT-ID: kaktus-cicd 
   REPO-NAME: kaktus-repo
-  REPO-FNAME: $REGION-docker.pkg.dev/$PROJECT-ID/$REPO-NAME
-  REGISTRY: $REGION-docker.pkg.dev
+  REPO-FNAME: ${REGION}-docker.pkg.dev/${PROJECT-ID}/${REPO-NAME}
+  REGISTRY: ${REGION}-docker.pkg.dev
   PROVIDER-ID: projects/1044927291290/locations/global/workloadIdentityPools/kaktus-pool/providers/kaktus-provider 
   IMAGE-NAME: node-web-app
   TAG: latest
