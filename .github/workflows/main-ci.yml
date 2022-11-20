@@ -62,7 +62,7 @@ jobs:
         with:
           push: true
           tags: |
-             ${{ env.REPO-FNAME }}:${{ steps.get-tag.outputs.short_ref }}
+             ${{ env.REPO-FNAME }}/${{ env.IMAGE-NAME }}:${{ steps.get-tag.outputs.short_ref }}
              ${{ env.REPO-FNAME }}/${{ env.IMAGE-NAME }}:latest
 
       - name: List of images
