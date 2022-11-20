@@ -1,2 +1,6 @@
-node_modules/
+# compiled output
+/node_modules
 npm-debug.log
+
+# Logs
+*.log
