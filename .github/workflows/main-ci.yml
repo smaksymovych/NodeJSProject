@@ -10,9 +10,14 @@ on:
 
 env:
   SERVICE-ACCOUNT: kaktus-service-account
+  REGION: us-central1
   PROJECT-ID: kaktus-cicd 
-  REPO: us-central1-docker.pkg.dev/kaktus-cicd/kaktus-repo
-  PROVIDER-ID: projects/1044927291290/locations/global/workloadIdentityPools/kaktus-pool/providers/kaktus-provider
+  REPO-NAME: kaktus-repo
+  REPO-FNAME: ${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT-ID }}/${{ env.REPO-NAME }}
+  REGISTRY: ${{ env.REGION }}-docker.pkg.dev
+  PROVIDER-ID: projects/1044927291290/locations/global/workloadIdentityPools/kaktus-pool/providers/kaktus-provider 
+  IMAGE-NAME: node-web-app
+  TAG: latest
 
 jobs:
   # define job to build and publish docker image
@@ -41,15 +46,24 @@ jobs:
       - name: Login to Artifact Registry
         uses: docker/login-action@v1
         with:
-          registry: us-central1-docker.pkg.dev
+          registry: ${{ env.REGISTRY }}
           username: oauth2accesstoken
           password: ${{ steps.auth.outputs.access_token }}
 
-      - name: Build Docker Image
-        working-directory: ./
-        run: |
-          VERSION=$(cat VERSION) 
-          docker build . --file Dockerfile --tag node-web-app:$VERSION-$(date +%s)
+#      - name: Build Docker Image
+#        working-directory: ./
+#        run: |
+#          VERSION=$(cat VERSION) 
+#          docker build . --file Dockerfile --tag node-web-app:$VERSION-$(date +%s)
+
+      - id: docker-push-tagged
+        name: Tag Docker image and push to Google Artifact Registry
+        uses: docker/build-push-action@v2
+        with:
+          push: true
+          tags: |
+             ${{ REPO-FNAME }}:${{ steps.get-tag.outputs.short_ref }}
+             ${{ REPO-FNAME }}/${{ IMAGE-NAME }}:latest
 
       - name: List of images
         run: docker images 
