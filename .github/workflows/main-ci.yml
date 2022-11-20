@@ -56,8 +56,12 @@ jobs:
 #          VERSION=$(cat VERSION) 
 #          docker build . --file Dockerfile --tag node-web-app:$VERSION-$(date +%s)
 
-      - id: docker-push-tagged
-        name: Tag Docker image and push to Google Artifact Registry
+      - name: Get tag
+        id: get-tag
+        run: echo ::set-output name=short_ref::${GITHUB_REF#refs/*/}
+
+      - name: Tag Docker image and push to Google Artifact Registry
+        id: docker-push-tagged
         uses: docker/build-push-action@v2
         with:
           push: true
