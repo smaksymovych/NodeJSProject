@@ -30,8 +30,8 @@ jobs:
         uses: google-github-actions/auth@v0
         with:
           token_format: access_token
-          workload_identity_provider: ${{ PROVIDER-ID }}
-          service_account: ${{ SERVICE-ACCOUNT }}@${{ PROJECT-ID }}.iam.gserviceaccount.com
+          workload_identity_provider: ${{ env.PROVIDER-ID }}
+          service_account: ${{ env.SERVICE-ACCOUNT }}@${{ env.PROJECT-ID }}.iam.gserviceaccount.com
           access_token_lifetime: 300s
 
       - name: Login to Artifact Registry
