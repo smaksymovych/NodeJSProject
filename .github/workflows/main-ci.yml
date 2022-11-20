@@ -12,14 +12,18 @@ env:
   SERVICE-ACCOUNT: kaktus-service-account
   PROJECT-ID: kaktus-cicd 
   REPO: us-central1-docker.pkg.dev/kaktus-cicd/kaktus-repo
-  PROVIDER-ID: kaktus-provider
+  PROVIDER-ID: projects/1044927291290/locations/global/workloadIdentityPools/kaktus-pool/providers/kaktus-provider
 
 jobs:
   # define job to build and publish docker image
   build-docker-image:
     name: Build image
     runs-on: ubuntu-latest
-
+    
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+    
     steps:
       - id: checkout
         name: Git clone repo
