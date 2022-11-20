@@ -58,8 +58,7 @@ jobs:
 
       - name: Get current date
         id: date
-        run: |
-          echo "{date}={$(date +'%Y-%m-%d')}" >> $GITHUB_STATE
+        run: echo "NOW::$(date +'%Y-%m-%dT%H:%M:%S')" >> $GITHUB_ENV
 
       - name: Tag Docker image and push to Google Artifact Registry
         id: docker-push-tagged
@@ -67,7 +66,7 @@ jobs:
         with:
           push: true
           tags: |
-             ${{ env.REPO-FNAME }}/${{ env.IMAGE-NAME }}:${{ env.date }}
+             ${{ env.REPO-FNAME }}/${{ env.IMAGE-NAME }}:$NOW
              ${{ env.REPO-FNAME }}/${{ env.IMAGE-NAME }}:latest
 
       - name: List of images
