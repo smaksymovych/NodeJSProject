@@ -66,7 +66,7 @@ jobs:
         with:
           push: true
           tags: |
-             ${{ env.REPO-FNAME }}/${{ env.IMAGE-NAME }}:$(date +%s)
+             ${{ env.REPO-FNAME }}/${{ env.IMAGE-NAME }}:${date +%s}
              ${{ env.REPO-FNAME }}/${{ env.IMAGE-NAME }}:latest
 
       - name: List of images
