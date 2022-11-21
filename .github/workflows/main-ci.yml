@@ -56,18 +56,13 @@ jobs:
 #          VERSION=$(cat VERSION) 
 #          docker build . --file Dockerfile --tag node-web-app:$VERSION-$(date +%s)
 
-      - name: Create Tags
-        run: |
-          echo "MAIN-TAG=$(cat VERSION)-$(date +%s)" >> $GITHUB_ENV
-          echo ${{ MAIN-TAG }}
-
       - name: Tag Docker image and push to Google Artifact Registry
         id: docker-push-tagged
         uses: docker/build-push-action@v2
         with:
           push: true
           tags: |
-             ${{ env.REPO-FNAME }}/${{ env.IMAGE-NAME }}:${{ env.MAIN-TAG }}
+             ${{ env.REPO-FNAME }}/${{ env.IMAGE-NAME }}:${{ env.NOW }}
              ${{ env.REPO-FNAME }}/${{ env.IMAGE-NAME }}:latest
 
       - name: List of images
