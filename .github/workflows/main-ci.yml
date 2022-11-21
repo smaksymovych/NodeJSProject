@@ -52,7 +52,7 @@ jobs:
 
       - name: Create Tags
         run: |
-          echo "MAIN-TAG=$( cat VERSION )-$( date +%Y%m%d_%H%M+%Z )" >> $GITHUB_ENV
+          echo "MAIN-TAG=$( cat VERSION )-$( date +%Y%m%d_%H%M_%Z )" >> $GITHUB_ENV
 
       - name: Tag Docker image and push to Google Artifact Registry
         id: docker-push-tagged
