@@ -55,6 +55,9 @@ jobs:
           password: ${{ steps.auth.outputs.access_token }}
 
       # Get the GKE credentials so we can deploy to the cluster
+      # Needs enable Kubernetes Engine API
+      # Required "container.clusters.get" permission(s) for "projects/kaktus-cicd/locations/us-east1/clusters/my-bamboo-auto-cluster".
+
       - name: Set up GKE credentials
         uses: google-github-actions/get-gke-credentials@v0
         with:
