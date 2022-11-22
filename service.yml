@@ -8,4 +8,4 @@ spec:
     - port: 80
       targetPort: 8080
   selector:
-    app: main-api
+    app: gke-kaktus-app
