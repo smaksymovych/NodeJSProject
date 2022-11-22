@@ -60,6 +60,7 @@ jobs:
         with:
           cluster_name: ${{ env.GKE_CLUSTER }}
           location: ${{ env.GKE_ZONE }}
+          project_id:  bamboo-sweep-368712
 
       - name: Create Tags
         run: |
