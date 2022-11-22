@@ -57,6 +57,8 @@ jobs:
       # Get the GKE credentials so we can deploy to the cluster
       # Needs enable Kubernetes Engine API
       # Required "container.clusters.get" permission(s) for "projects/kaktus-cicd/locations/us-east1/clusters/my-bamboo-auto-cluster".
+      # Add Kubernetes Engine Admin for service account in kaktus-cicd 
+      # Add Kubernetes Engine Admin for service account in bamboo-sweep-368712 
 
       - name: Set up GKE credentials
         uses: google-github-actions/get-gke-credentials@v0
