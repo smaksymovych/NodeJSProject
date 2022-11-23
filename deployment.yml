@@ -19,7 +19,8 @@ spec:
     spec:
       containers:
       - name: main-api
-        image: LOCATION-docker.pkg.dev/PROJECT_ID/REPOSITORY/IMAGE:TAG
+      #  image: LOCATION-docker.pkg.dev/PROJECT_ID/REPOSITORY/IMAGE:TAG
+        image: us-central1-docker.pkg.dev/kaktus-cicd/kaktus-repo/kaktus-repo:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
