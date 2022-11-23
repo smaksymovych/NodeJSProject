@@ -67,11 +67,12 @@ jobs:
           location: ${{ env.GKE_ZONE }}
           project_id:  bamboo-sweep-368712
 
-      - id: 'upload-file'
+      - name: Upload to Cloud Storage
+        id: 'upload-file'
         uses: 'google-github-actions/upload-cloud-storage@v1'
         with:
-          path: 'server.js'
-          destination: 'kaktus-site/server.js'
+          path: 'index.html'
+          destination: 'kaktus-site/index.html'
           project_id:  bamboo-sweep-368712
 
       - name: Create Tags
